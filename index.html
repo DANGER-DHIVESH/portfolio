@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>👨‍🎓Dhivesh-Portfolio</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif;}
+:root{--bg:#f9f9f9;--text:#111;--card:#fff;--primary:#38bdf8;--dark:#0f172a;}
+body.dark{--bg:#0f172a;--text:#f1f5f9;--card:#020617;}
+body{background:var(--bg);color:var(--text);transition:.3s;line-height:1.6;}
+header{height:100vh;background:var(--dark);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;}
+header h1{font-size:3rem;}
+header p{margin:15px 0;opacity:.9;}
+.btns a,.btns button{margin:8px;padding:10px 18px;border-radius:5px;border:none;cursor:pointer;font-weight:600;text-decoration:none;background:var(--primary);color:#000;}
+.btns .outline{background:transparent;border:2px solid var(--primary);color:var(--primary);}
+section{max-width:900px;margin:auto;padding:60px 20px;}
+h2{margin-bottom:15px;font-size:1.8rem;}
+.skills span{display:inline-block;background:var(--card);margin:6px;padding:8px 12px;border-radius:4px;}
+.filters button{margin:5px;padding:6px 12px;border:none;cursor:pointer;background:var(--dark);color:#fff;}
+.project{background:var(--card);margin:15px 0;padding:15px;border-left:4px solid var(--primary);}
+.contact p{margin:8px 0;}
+footer{text-align:center;padding:20px;background:var(--dark);color:#fff;}
+@media(max-width:600px){header h1{font-size:2.2rem;}}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<header>
+  <h1>Dhivesh</h1>
+  <p>Software Developer | Python • C • Arduino • Web</p>
+  <div class="btns">
+    <a href="#projects">Projects</a>
+    <a href="#contact" class="outline">Contact</a>
+    <button onclick="toggleMode()">🌙</button>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section>
+  <h2>About Me</h2>
+  <p>
+    I am a software developer with basic knowledge in Python, C, Arduino,
+    and web technologies. I enjoy building mini projects and learning
+    through hands-on implementation.
+  </p>
+</section>
+
+<!-- SKILLS (HONEST) -->
+<section class="skills">
+  <h2>Skills (Basics)</h2>
+  <span>Python (Basics)</span>
+  <span>C (Basics)</span>
+  <span>Arduino (Basics)</span>
+  <span>HTML5 (Basics)</span>
+  <span>CSS3 (Basics)</span>
+  <span>JavaScript (Basics)</span>
+  <span>Git & GitHub (Basics)</span>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+<h2>Projects</h2>
+
+<div class="filters">
+  <button onclick="filter('all')">All</button>
+  <button onclick="filter('python')">Python</button>
+  <button onclick="filter('arduino')">Arduino</button>
+  <button onclick="filter('web')">Web</button>
+</div>
+
+<div class="project web">
+  <h3>Professional Portfolio Website</h3>
+  <p>Responsive portfolio with dark/light mode and filtering.</p>
+  <p><b>Tech:</b> HTML, CSS, JavaScript</p>
+</div>
+
+<div class="project python">
+  <h3>Python Chatbot</h3>
+  <p>Rule-based chatbot using conditional logic and functions.</p>
+  <p><b>Tech:</b> Python</p>
+</div>
+
+<div class="project web">
+  <h3>Market App</h3>
+  <p>Console-based market application simulating basic purchase flow.</p>
+  <p><b>Tech:</b>HTML, CSS, JavaScript </p>
+</div>
+
+<div class="project web">
+  <h3>Abode App</h3>
+  <p>Mini application for managing user data using modular code.</p>
+  <p><b>Tech:</b> HTML, CSS, JavaScript</p>
+</div>
+
+<div class="project arduino">
+  <h3>Arduino Smart System</h3>
+  <p>Sensor-based automation using Arduino and Embedded C.</p>
+  <p><b>Tech:</b> Arduino, Embedded C</p>
+</div>
+
+</section>
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <h2>Contact</h2>
+
+  <p>Email:
+    <a href="mailto:dhivesh4516c@gmail.com">
+      dhivesh4516c@gmail.com
+    </a>
+  </p>
+
+  <p>GitHub:
+    <a href="https://github.com/DANGER-DHIVESH" target="_blank">
+      DANGER-DHIVESH
+    </a>
+  </p>
+
+  <p>LinkedIn:
+    <a href="https://linkedin.com/in/dhivesh-m" target="_blank">
+      linkedin.com/in/dhivesh-m
+    </a>
+  </p>
+</section>
+
+</section>
+
+<footer>
+<p>© 2026 Dhivesh | Software Developer</p>
+</footer>
+
+<script>
+function filter(type){
+  document.querySelectorAll('.project').forEach(p=>{
+    p.style.display =
+      type==='all' || p.classList.contains(type)
+      ? 'block'
+      : 'none';
+  });
+}
+function toggleMode(){
+  document.body.classList.toggle('dark');
+}
+document.querySelectorAll('a[href^="#"]').forEach(link=>{
+  link.addEventListener('click',e=>{
+    e.preventDefault();
+    document.querySelector(link.getAttribute('href'))
+    .scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
+
+</body>
+</html>
