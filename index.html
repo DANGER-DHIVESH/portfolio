@@ -13,15 +13,16 @@
   font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
 }
 
-/* ===== THEME ===== */
+/* ===== DARK MODE (IMPROVED) ===== */
 :root{
-  --bg:#0b1220;
-  --card:#111827;
+  --bg:#020617;
+  --card:#0b1220;
   --text:#e5e7eb;
-  --muted:#9ca3af;
+  --muted:#94a3b8;
   --accent:#38bdf8;
 }
 
+/* ===== LIGHT MODE ===== */
 body.light{
   --bg:#f9fafb;
   --card:#ffffff;
@@ -36,8 +37,8 @@ body{
   transition:background .6s ease,color .6s ease,filter .6s ease;
 }
 
-body.light-on{filter:brightness(1.1);}
-body.light-off{filter:brightness(0.9);}
+body.light-on{filter:brightness(1.12);}
+body.light-off{filter:brightness(0.88);}
 
 /* ===== NAVBAR ===== */
 nav{
@@ -107,7 +108,8 @@ header{
 }
 
 .profile{
-  width:120px;height:120px;
+  width:120px;
+  height:120px;
   border-radius:50%;
   object-fit:cover;
   border:3px solid var(--accent);
@@ -117,18 +119,15 @@ header{
 header h1{font-size:2.6rem;}
 header p{color:var(--muted);margin-top:8px;}
 
+/* ===== TYPING (NO CURSOR) ===== */
 .typing{
   margin-top:25px;
   font-family:monospace;
   color:var(--accent);
-  border-right:2px solid var(--accent);
-  white-space:nowrap;
-  overflow:hidden;
-  width:0;
-  animation:typing 4s steps(30,end) infinite alternate, blink .7s infinite;
+  font-size:1rem;
+  white-space:pre-line;
+  max-width:800px;
 }
-@keyframes typing{from{width:0;}to{width:260px;}}
-@keyframes blink{50%{border-color:transparent;}}
 
 /* ===== SECTIONS ===== */
 section{
@@ -144,7 +143,7 @@ section h2{
   font-size:1.8rem;
 }
 
-/* REVEAL */
+/* SCROLL REVEAL */
 .reveal{
   opacity:0;
   transform:translateY(40px);
@@ -177,12 +176,13 @@ section h2{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  transition:.3s;
+  transition:transform .3s ease, box-shadow .3s ease;
+  border:1px solid rgba(255,255,255,0.04);
 }
 
 .skill:hover{
-  transform:translateY(-6px);
-  box-shadow:0 15px 35px rgba(0,0,0,.3);
+  transform:scale(1.07);
+  box-shadow:0 18px 40px rgba(0,0,0,.4);
 }
 
 .level{
@@ -206,11 +206,12 @@ section h2{
   padding:26px;
   border-radius:20px;
   transition:.3s;
+  border:1px solid rgba(255,255,255,0.04);
 }
 
 .project:hover{
   transform:translateY(-6px);
-  box-shadow:0 15px 35px rgba(0,0,0,.3);
+  box-shadow:0 15px 35px rgba(0,0,0,.4);
 }
 
 .project p{
@@ -254,17 +255,19 @@ footer{
 
 <!-- HERO -->
 <header>
-  <img src="Profile.jpg" class="profile">
+  <img src="profile.jpg" class="profile">
   <h1>DHIVESH-M</h1>
   <p>Frontend Developer • Arduino • Web</p>
-  <div class="typing">welcome to my portfolio</div>
+  <div class="typing" id="typing"></div>
 </header>
 
 <!-- ABOUT -->
 <section id="about" class="reveal">
   <h2>About</h2>
   <p class="about">
-    I am a passionate developer focused on creating clean, responsive, and user-friendly web experiences. I enjoy working with modern web technologies and learning through real-world projects. I believe in writing simple, maintainable code and continuously improving my technical and design skills.
+    I am a passionate developer focused on creating clean, responsive,
+    and user-friendly web experiences. I enjoy learning through real-world
+    projects and continuously improving both my technical and design skills.
   </p>
 </section>
 
@@ -287,22 +290,10 @@ footer{
 <section id="projects" class="reveal">
   <h2>Projects</h2>
   <div class="projects">
-    <div class="project">
-      <h3>Portfolio Website</h3>
-      <p>Responsive personal portfolio with modern UI.</p>
-    </div>
-    <div class="project">
-      <h3>Python Project</h3>
-      <p>Python-based project using logic, conditions, and functions.</p>
-    </div>
-    <div class="project">
-      <h3>Abode Web App</h3>
-      <p>User data management web application with modular structure.</p>
-    </div>
-    <div class="project">
-      <h3>Arduino Smart System</h3>
-      <p>Sensor-based automation system using Arduino.</p>
-    </div>
+    <div class="project"><h3>Portfolio Website</h3><p>Responsive personal portfolio.</p></div>
+    <div class="project"><h3>Python Project</h3><p>Logic-based Python application.</p></div>
+    <div class="project"><h3>Abode Web App</h3><p>User data management system.</p></div>
+    <div class="project"><h3>Arduino Smart System</h3><p>Sensor-based automation.</p></div>
   </div>
 </section>
 
@@ -317,6 +308,7 @@ footer{
 <footer>© 2026 Dhivesh</footer>
 
 <script>
+/* scroll reveal */
 const reveals=document.querySelectorAll(".reveal");
 function revealOnScroll(){
   reveals.forEach(el=>{
@@ -328,10 +320,12 @@ function revealOnScroll(){
 window.addEventListener("scroll",revealOnScroll);
 revealOnScroll();
 
+/* menu toggle */
 function toggleMenu(){
   document.getElementById("menu").classList.toggle("show");
 }
 
+/* dark / light */
 function toggleMode(){
   if(document.body.classList.contains("light")){
     document.body.classList.remove("light");
@@ -343,6 +337,30 @@ function toggleMode(){
     setTimeout(()=>document.body.classList.remove("light-on"),600);
   }
 }
+
+/* typing once and stop (no cursor) */
+const text = `Hi, my name is Dhivesh.
+I’m from Pollachi, and I’m currently a 1st-year B.Sc. Artificial Intelligence and Machine Learning student at Rathinam College.
+
+I’m deeply interested in technology, coding, and AI-based systems. I enjoy learning how things work behind the scenes—especially programming, web development, and problem-solving using logic.
+
+I like experimenting with new ideas, building small projects, and improving my skills step by step.
+
+I believe consistency matters more than talent, and I’m focused on upgrading myself every day to become a strong tech professional in the future.
+
+Thank you.`;
+
+const typingEl=document.getElementById("typing");
+let i=0;
+
+function typeOnce(){
+  if(i<text.length){
+    typingEl.textContent+=text.charAt(i);
+    i++;
+    setTimeout(typeOnce,35);
+  }
+}
+typeOnce();
 </script>
 
 </body>
